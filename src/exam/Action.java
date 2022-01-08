@@ -1,4 +1,4 @@
-package edu1;
+package exam;
 
 public interface Action {
     void feedCat();

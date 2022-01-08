@@ -1,4 +1,4 @@
-package edu1;
+package exam;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -9,6 +9,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        start();
+    }
+
+    public static void start() {
         List<Cat> cats = new ArrayList<>(3);
         cats.add(new Cat("Cat 1", 3, 80, 80, 80));
         cats.add(new Cat("Cat 2", 10, 50, 90, 90));
@@ -16,24 +20,19 @@ public class Main {
         cats.add(new Cat("Cat 4", 5, 70, 70, 70));
         cats.add(new Cat("Cat 5", 9, 60, 60, 60));
 
-        Printer.printHeader();
-        cats.sort(Cat::sortByAverageLevel);
-        cats.forEach(c -> {
-            Printer.printCat(cats.indexOf(c) + 1, c);
-        });
+        boolean exit = false;
+        while (!exit) {
+            Printer.printHeader();
+            cats.sort(Cat::sortByAverageLevel);
+            cats.forEach(cat -> Printer.printCat(cats.indexOf(cat) + 1, cat));
 
-        List<Cat> newCats = action(cats);
-
-        Printer.printHeader();
-        newCats.sort(Cat::sortByAverageLevel);
-        newCats.forEach(c -> {
-            Printer.printCat(newCats.indexOf(c) + 1, c);
-        });
-
+            exit = action(cats);
+        }
 
     }
 
-    public static List<Cat> action(List<Cat> cats) {
+    public static boolean action(List<Cat> cats) {
+        boolean exit = false;
 
         System.out.println("You also could actions: ");
         System.out.println("● Feed the cat      => 1");
@@ -41,7 +40,7 @@ public class Main {
         System.out.println("● Treat the cat     => 3");
         System.out.println("● Get a new pet     => A");
         System.out.println("● To the next day   => N");
-
+        System.out.println("● To exit ===========> E");
 
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the comand: ");
@@ -73,9 +72,12 @@ public class Main {
                 cats.forEach(Cat::toNextDay);
                 System.out.println("One day passed!");
                 break;
+            case "e":
+            case "E":
+                exit = true;
+                break;
         }
-
-        return cats;
+        return exit;
     }
 
     public static Cat chooseCat(List<Cat> cats) {
@@ -131,8 +133,7 @@ public class Main {
         int mood = rnd.nextInt(80) + 20;
         int health = rnd.nextInt(80) + 20;
 
-        Cat newCat = new Cat(inputName, intInputAge, satiety, mood, health);
-        return newCat;
+        return new Cat(inputName, intInputAge, satiety, mood, health);
     }
 
     public static int tryInt(String birth) throws ParseException {

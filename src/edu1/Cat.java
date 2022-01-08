@@ -1,6 +1,6 @@
 package edu1;
 
-public class Cat {
+public class Cat implements Action {
     private String name;
     private int age;
     private int satiety;
@@ -17,6 +17,62 @@ public class Cat {
         this.averageLevel = calcAverageLevel();
     }
 
+    @Override
+    public void feedCat() {
+        if (this.age >= 1 && this.age <= 5) {
+            this.satiety = this.satiety + 7;
+            this.mood = this.mood + 7;
+        } else if (this.age > 5 && this.age <= 10) {
+            this.satiety = this.satiety + 5;
+            this.mood = this.mood + 5;
+        } else if (this.age > 10) {
+            this.satiety = this.satiety + 4;
+            this.mood = this.mood + 4;
+        }
+        System.out.println("The cat: " + this.name + " is fed!");
+    }
+
+    @Override
+    public void playWithCat() {
+        if (this.age >= 1 && this.age <= 5) {
+            this.satiety = this.satiety - 3;
+
+            this.health = this.health + 7;
+            this.mood = this.mood + 7;
+        } else if (this.age > 5 && this.age <= 10) {
+            this.satiety = this.satiety - 5;
+
+            this.health = this.health + 5;
+            this.mood = this.mood + 5;
+        } else if (this.age > 10) {
+            this.satiety = this.satiety - 6;
+
+            this.health = this.health + 4;
+            this.mood = this.mood + 4;
+        }
+        System.out.println("The cat:" + this.name + " played!");
+    }
+
+    @Override
+    public void treatCat() {
+        if (this.age >= 1 && this.age <= 5) {
+            this.satiety = this.satiety - 3;
+            this.mood = this.mood - 3;
+
+            this.health = this.health + 7;
+        } else if (this.age > 5 && this.age <= 10) {
+            this.satiety = this.satiety - 5;
+            this.mood = this.mood - 5;
+
+            this.health = this.health + 5;
+        } else if (this.age > 10) {
+            this.satiety = this.satiety - 6;
+            this.mood = this.mood - 6;
+
+            this.health = this.health + 4;
+        }
+        System.out.println("The cat: " + this.name + " is cured!");
+    }
 
     public static int sortByAverageLevel(Cat c1, Cat c2) {
         return c2.getAverageLevel() - c1.getAverageLevel();
@@ -49,6 +105,7 @@ public class Cat {
     }
 
     public int getAverageLevel() {
+        this.averageLevel = calcAverageLevel();
         return averageLevel;
     }
 }

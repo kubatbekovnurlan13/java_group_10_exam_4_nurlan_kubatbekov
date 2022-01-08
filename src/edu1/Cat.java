@@ -1,5 +1,7 @@
 package edu1;
 
+import java.util.Random;
+
 public class Cat implements Action {
     private String name;
     private int age;
@@ -15,6 +17,31 @@ public class Cat implements Action {
         this.mood = mood;
         this.health = health;
         this.averageLevel = calcAverageLevel();
+    }
+
+    @Override
+    public void toNextDay() {
+        Random rnd = new Random();
+        int randomHealthNumber = rnd.nextInt(3) + 1;
+        int ranodmMoodNumber = rnd.nextInt(3) + 1;
+        int randomSatietyNumber = rnd.nextInt(5) + 1;
+
+        int switcherForHealth = rnd.nextInt(2) + 1;
+        int switcherForMood = rnd.nextInt(2) + 1;
+
+        if (switcherForHealth == 1) {
+            this.health = this.health - randomHealthNumber;
+        } else {
+            this.health = this.health + randomHealthNumber;
+        }
+
+        if (switcherForMood == 1) {
+            this.mood = this.mood - ranodmMoodNumber;
+        } else {
+            this.mood = this.mood + ranodmMoodNumber;
+        }
+
+        this.satiety = this.satiety - randomSatietyNumber;
     }
 
     @Override

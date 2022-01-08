@@ -40,6 +40,8 @@ public class Main {
         System.out.println("● Play with the cat => 2");
         System.out.println("● Treat the cat     => 3");
         System.out.println("● Get a new pet     => A");
+        System.out.println("● To the next day   => N");
+
 
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the comand: ");
@@ -65,6 +67,11 @@ public class Main {
             case "A":
                 Cat newCat1 = inputCat();
                 cats.add(newCat1);
+                break;
+            case "N":
+            case "n":
+                cats.forEach(Cat::toNextDay);
+                System.out.println("One day passed!");
                 break;
         }
 

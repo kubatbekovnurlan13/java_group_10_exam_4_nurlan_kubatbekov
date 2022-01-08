@@ -18,7 +18,7 @@ public class Cat {
     }
 
 
-    public static int sortByAverageLevel(Cat c1,Cat c2) {
+    public static int sortByAverageLevel(Cat c1, Cat c2) {
         return c2.getAverageLevel() - c1.getAverageLevel();
     }
 
